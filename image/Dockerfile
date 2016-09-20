@@ -11,4 +11,4 @@ RUN /bd_build/prepare.sh && \
 
 CMD ["/sbin/my_init"]
 
-EXPOSE 443
+EXPOSE 443 13514
