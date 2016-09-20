@@ -1,0 +1,20 @@
+version: '2'
+services:
+    minemeld:
+        image: jtschichold/minemeld
+        ports:
+            - '443'
+            - '13514'
+        volumes:
+            - minemeld-config:/opt/minemeld/local/config
+            - minemeld-prototypes:/opt/minemeld/local/prototypes
+            - minemeld-data:/opt/minemeld/local/data
+            - minemeld-library:/opt/minemeld/local/library
+            - minemeld-trace:/opt/minemeld/local/trace
+
+volumes:
+    minemeld-config:
+    minemeld-prototypes:
+    minemeld-data:
+    minemeld-library:
+    minemeld-trace:
