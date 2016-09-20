@@ -5,7 +5,7 @@ set -x
 
 REDIS_BUILD_PATH=/bd_build/services/redis
 
-## Install a syslog daemon.
+## Install redis.
 $minimal_apt_get_install -y redis-server
 mkdir /etc/service/redis
 cp $REDIS_BUILD_PATH/redis.runit /etc/service/redis/run

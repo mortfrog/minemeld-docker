@@ -5,7 +5,7 @@ set -x
 
 RABBITMQ_BUILD_PATH=/bd_build/services/rabbitmq
 
-## Install a syslog daemon.
+## Install rabbitmq.
 $minimal_apt_get_install -y rabbitmq-server
 mkdir /etc/service/rabbitmq
 cp $RABBITMQ_BUILD_PATH/rabbitmq.runit /etc/service/rabbitmq/run
