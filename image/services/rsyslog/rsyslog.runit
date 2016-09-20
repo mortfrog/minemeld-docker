@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+RSYSLOG_OPTIONS=""
+
+echo "Starting rsyslog"
+[ -f /var/run/rsyslogd.pid ] && rm /var/run/rsyslogd.pid
+exec /usr/sbin/rsyslogd -n $RSYSLOG_OPTIONS
