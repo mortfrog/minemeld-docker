@@ -9,7 +9,7 @@ MM_BUILD_PATH=/bd_build/services/minemeld
 dpkg-divert --local --rename --add /usr/sbin/service
 ln -sf /bin/true /usr/sbin/service
 
-## Install a syslog daemon.
+## Install minemeld.
 $minimal_apt_get_install -y minemeld
 mkdir /etc/service/minemeld
 cp $MM_BUILD_PATH/minemeld.runit /etc/service/minemeld/run

@@ -2,4 +2,7 @@
 
 Unstable, go away.
 
-MineMeld as an app container.
+MineMeld inside a docker container.
+
+Based on phusion baseimage-docker, inspired by @swannysec and @bilalbox
+
