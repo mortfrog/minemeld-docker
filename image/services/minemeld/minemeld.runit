@@ -1,13 +1,21 @@
 #!/bin/bash
 set -e
 
-PIDFILE=/opt/minemeld/local/supervisor/run/minemeld.pid
+PIDFILE=/var/run/minemeld/minemeld.pid
 CONFIGFILE=/opt/minemeld/local/supervisor/config/supervisord.conf
 
 echo "minemeld: checking if dependencies are running..."
 sv status rabbitmq || exit 1
 sv status redis || exit 1
 sv status collectd || exit 1
+
+# check if PID DIR exists (from rabbitmq init script)
+PIDDIR=$(dirname $PIDFILE)
+if [ ! -d ${PIDDIR} ] ; then
+	mkdir -p ${PIDDIR}
+	chown -R minemeld:minemeld ${PIDDIR}
+	chmod 755 ${PIDDIR}
+fi
 
 echo "Starting minemeld..."
 exec /opt/minemeld/engine/current/bin/supervisord -u minemeld -n -c ${CONFIGFILE} --pidfile ${PIDFILE}
