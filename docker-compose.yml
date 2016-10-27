@@ -11,6 +11,7 @@ services:
             - minemeld-data:/opt/minemeld/local/data
             - minemeld-library:/opt/minemeld/local/library
             - minemeld-trace:/opt/minemeld/local/trace
+        tmpfs: /run
 
 volumes:
     minemeld-config:
