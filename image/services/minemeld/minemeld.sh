@@ -14,6 +14,10 @@ $minimal_apt_get_install -y minemeld
 mkdir /etc/service/minemeld
 cp $MM_BUILD_PATH/minemeld.runit /etc/service/minemeld/run
 
+## Install default config
+mkdir /usr/share/minemeld
+cp $MM_BUILD_PATH/default/* /usr/share/minemeld
+
 ## Divert 'service' (again)
 ln -sf /usr/bin/sv /usr/sbin/service
 
