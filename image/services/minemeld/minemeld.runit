@@ -9,6 +9,13 @@ sv status rabbitmq || exit 1
 sv status redis || exit 1
 sv status collectd || exit 1
 
+# check if committed-config exists
+if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
+	echo "Copying default configs to the config directory..."
+	cp /usr/share/minemeld/* /opt/minemeld/local/config/
+	chown minemeld:minemeld /opt/minemeld/local/config/*
+fi
+
 # check if PID DIR exists (from rabbitmq init script)
 PIDDIR=$(dirname $PIDFILE)
 if [ ! -d ${PIDDIR} ] ; then
