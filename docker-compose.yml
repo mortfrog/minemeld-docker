@@ -6,16 +6,8 @@ services:
             - '8443:443'
             - '13514'
         volumes:
-            - minemeld-config:/opt/minemeld/local/config
-            - minemeld-prototypes:/opt/minemeld/local/prototypes
-            - minemeld-data:/opt/minemeld/local/data
-            - minemeld-library:/opt/minemeld/local/library
-            - minemeld-trace:/opt/minemeld/local/trace
+            - minemeld-local:/opt/minemeld/local
         tmpfs: /run
 
 volumes:
-    minemeld-config:
-    minemeld-prototypes:
-    minemeld-data:
-    minemeld-library:
-    minemeld-trace:
+    minemeld-local:
