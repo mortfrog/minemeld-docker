@@ -9,7 +9,7 @@ RUN /bd_build/prepare.sh && \
 	/bd_build/utilities.sh && \
 	/bd_build/cleanup.sh
 
-EXPOSE 443 13514
+EXPOSE 80
 VOLUME ["/opt/minemeld/local/"]
 
 CMD ["/sbin/my_init"]
