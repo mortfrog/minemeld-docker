@@ -20,6 +20,10 @@ cp $MM_BUILD_PATH/minemeld.runit /etc/service/minemeld/run
 ## Install default config
 mkdir /usr/share/minemeld
 cp -R $MM_BUILD_PATH/default/* /usr/share/minemeld
+cp -R $MM_BUILD_PATH/default/* /opt/minemeld/local/config
+
+## Override nginx
+cp $MM_BUILD_PATH/minemeld-web.nginx /etc/nginx/sites-enabled/minemeld-web
 
 ## Divert 'service' (again)
 ln -sf /usr/bin/sv /usr/sbin/service
