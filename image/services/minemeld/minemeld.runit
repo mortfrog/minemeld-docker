@@ -15,10 +15,10 @@ exec 6>&- || exit 1
 
 # check if committed-config exists
 if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
-	mkdir /opt/minemeld/local/prototypes
-	mkdir /opt/minemeld/local/data
-	mkdir /opt/minemeld/local/library
-	mkdir /opt/minemeld/local/trace
+	mkdir -p /opt/minemeld/local/prototypes
+	mkdir -p /opt/minemeld/local/data
+	mkdir -p /opt/minemeld/local/library
+	mkdir -p /opt/minemeld/local/trace
 
 	echo "Copying default configs to the config directory..."
 	cp -R /usr/share/minemeld/* /opt/minemeld/local/config/
