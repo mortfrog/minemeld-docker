@@ -15,6 +15,7 @@ exec 6>&- || exit 1
 
 # check if committed-config exists
 if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
+        mkdir -p /opt/minemeld/local/config
 	mkdir -p /opt/minemeld/local/prototypes
 	mkdir -p /opt/minemeld/local/data
 	mkdir -p /opt/minemeld/local/library
