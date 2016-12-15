@@ -17,6 +17,9 @@ $minimal_apt_get_install -q -o Dpkg::Options::=--force-confdef -o Dpkg::Options:
 mkdir /etc/service/minemeld
 cp $MM_BUILD_PATH/minemeld.runit /etc/service/minemeld/run
 
+## Install autofocus extension
+/opt/minemeld/engine/current/bin/pip install $MM_BUILD_PATH/minemeld-autofocus
+
 ## Install default config
 mkdir /usr/share/minemeld
 cp -R $MM_BUILD_PATH/default/* /usr/share/minemeld
