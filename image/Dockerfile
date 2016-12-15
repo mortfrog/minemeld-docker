@@ -10,6 +10,7 @@ RUN /bd_build/prepare.sh && \
 	/bd_build/cleanup.sh
 
 EXPOSE 80
-VOLUME ["/opt/minemeld/local/config","/opt/minemeld/local/data","/opt/minemeld/local/trace","/opt/minemeld/local/prototypes","/opt/minemeld/local/trace"]
+
+VOLUME ["/opt/minemeld/local/"]
 
 CMD ["/sbin/my_init"]

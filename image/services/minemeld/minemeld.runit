@@ -9,8 +9,13 @@ sv status rabbitmq || exit 1
 sv status redis || exit 1
 sv status collectd || exit 1
 
+echo "minemeld: checking if rabbitmq is serving requests..."
+exec 6<>/dev/tcp/127.0.0.1/5672 || exit 1
+exec 6>&- || exit 1
+
 # check if committed-config exists
 if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
+        mkdir -p /opt/minemeld/local/config
 	mkdir -p /opt/minemeld/local/prototypes
 	mkdir -p /opt/minemeld/local/data
 	mkdir -p /opt/minemeld/local/library
