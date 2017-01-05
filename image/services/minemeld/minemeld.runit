@@ -15,7 +15,7 @@ exec 6>&- || exit 1
 
 # check if committed-config exists
 if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
-        mkdir -p /opt/minemeld/local/config
+	mkdir -p /opt/minemeld/local/config
 	mkdir -p /opt/minemeld/local/prototypes
 	mkdir -p /opt/minemeld/local/data
 	mkdir -p /opt/minemeld/local/library
@@ -30,6 +30,9 @@ if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
 	chown minemeld:minemeld -R /opt/minemeld/local/library
 	chown minemeld:minemeld -R /opt/minemeld/local/trace
 fi
+
+# copy default API config anyway
+cp /usr/share/minemeld/api/10-defaults.yml /opt/minemeld/local/config/api
 
 # check if PID DIR exists (from rabbitmq init script)
 PIDDIR=$(dirname $PIDFILE)

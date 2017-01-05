@@ -20,10 +20,13 @@ cp $MM_BUILD_PATH/minemeld.runit /etc/service/minemeld/run
 ## Install autofocus extension
 /opt/minemeld/engine/current/bin/pip install $MM_BUILD_PATH/minemeld-autofocus
 
+# Change config
+truncate -s 0 /opt/minemeld/local/config/api/wsgi.htpasswd
+rm -f /opt/minemeld/local/config/api/20-local.yml
+
 ## Install default config
 mkdir /usr/share/minemeld
-cp -R $MM_BUILD_PATH/default/* /usr/share/minemeld
-cp -R $MM_BUILD_PATH/default/* /opt/minemeld/local/config
+cp -R /opt/minemeld/local/config/* /usr/share/minemeld
 
 ## Override nginx
 cp $MM_BUILD_PATH/minemeld-web.nginx /etc/nginx/sites-enabled/minemeld-web
