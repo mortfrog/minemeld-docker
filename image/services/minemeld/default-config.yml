@@ -1,0 +1,53 @@
+nodes:
+  ransomwaretracker_rw_dombl:
+    inputs: []
+    output: true
+    prototype: ransomwaretracker.RW_DOMBL
+  ransomwaretracker_rw_ipbl:
+    inputs: []
+    output: true
+    prototype: ransomwaretracker.RW_IPBL
+  ransomwaretracker_rw_urlbl:
+    inputs: []
+    output: true
+    prototype: ransomwaretracker.RW_URLBL
+  incomingDomainsAggregator:
+    inputs:
+      - ransomwaretracker_rw_dombl
+    output: true
+    prototype: stdlib.aggregatorDomain
+  incomingURLAggregator:
+    inputs:
+      - ransomwaretracker_rw_urlbl
+    output: true
+    prototype: stdlib.aggregatorURL
+  incomingIPv4Aggregator:
+    inputs:
+      - ransomwaretracker_rw_ipbl
+      - spamhaus_DROP
+      - spamhaus_EDROP
+    output: true
+    prototype: stdlib.aggregatorIPv4Generic
+  spamhaus_DROP:
+    inputs: []
+    output: true
+    prototype: spamhaus.DROP
+  spamhaus_EDROP:
+    inputs: []
+    output: true
+    prototype: spamhaus.EDROP
+  domainArtifactsOutput:
+    inputs:
+      - incomingDomainsAggregator
+    output: false
+    prototype: autofocus.artifactsOutput
+  IPv4ArtifactsOutput-1484664269335:
+    inputs:
+      - incomingIPv4Aggregator
+    output: false
+    prototype: autofocus.artifactsOutput
+  URLArtifactsOutput:
+    inputs:
+      - incomingURLAggregator
+    output: false
+    prototype: autofocus.artifactsOutput

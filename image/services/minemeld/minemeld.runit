@@ -22,7 +22,8 @@ if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
 	mkdir -p /opt/minemeld/local/trace
 
 	echo "Copying default configs to the config directory..."
-	cp -R /usr/share/minemeld/* /opt/minemeld/local/config/
+	cp -R /usr/share/minemeld/config/* /opt/minemeld/local/config/
+
 	echo "Setting permissions on local directories..."
 	chown minemeld:minemeld -R /opt/minemeld/local/config
 	chown minemeld:minemeld -R /opt/minemeld/local/prototypes
@@ -31,8 +32,16 @@ if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
 	chown minemeld:minemeld -R /opt/minemeld/local/trace
 fi
 
+echo "Copying constraints"
+cp /usr/share/minemeld/constraints.txt /opt/minemeld/local/library/
+
+if [ -f /opt/minemeld/local/library/freeze.txt ]; then
+	echo "Reinstalling external extensions"
+	sudo -u minemeld /opt/minemeld/engine/current/bin/pip install -c /opt/minemeld/local/library/constraints.txt -r /opt/minemeld/local/library/freeze.txt
+fi
+
 # copy default API config anyway
-cp /usr/share/minemeld/api/10-defaults.yml /opt/minemeld/local/config/api
+cp /usr/share/minemeld/config/api/10-defaults.yml /opt/minemeld/local/config/api
 
 # check if PID DIR exists (from rabbitmq init script)
 PIDDIR=$(dirname $PIDFILE)
