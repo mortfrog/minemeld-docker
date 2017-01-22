@@ -41,7 +41,7 @@ nodes:
       - incomingDomainsAggregator
     output: false
     prototype: autofocus.artifactsOutput
-  IPv4ArtifactsOutput-1484664269335:
+  IPv4ArtifactsOutput:
     inputs:
       - incomingIPv4Aggregator
     output: false

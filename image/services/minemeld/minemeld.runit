@@ -34,10 +34,11 @@ fi
 
 echo "Copying constraints"
 cp /usr/share/minemeld/constraints.txt /opt/minemeld/local/library/
+chown minemeld:minemeld /opt/minemeld/local/library/constraints.txt
 
 if [ -f /opt/minemeld/local/library/freeze.txt ]; then
 	echo "Reinstalling external extensions"
-	sudo -u minemeld /opt/minemeld/engine/current/bin/pip install -c /opt/minemeld/local/library/constraints.txt -r /opt/minemeld/local/library/freeze.txt
+	sudo -u minemeld xargs -a /opt/minemeld/local/library/freeze.txt -n1 -d'\n' /bin/bash -c 'echo "$0" && (/opt/minemeld/engine/current/bin/pip install -c /opt/minemeld/local/library/constraints.txt $0 || true)'
 fi
 
 # copy default API config anyway

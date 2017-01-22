@@ -32,7 +32,7 @@ cp -R /opt/minemeld/local/config/* /usr/share/minemeld/config
 cp $MM_BUILD_PATH/default-config.yml /opt/minemeld/local/config/committed-config.yml
 cp $MM_BUILD_PATH/default-config.yml /usr/share/minemeld/config/committed-config.yml
 
-## Define constraints.txt for extensions
+## Define constraints.txt for extensions, with minemeld-autofocus installed
 /opt/minemeld/engine/current/bin/pip freeze > /opt/minemeld/local/library/constraints.txt
 cp /opt/minemeld/local/library/constraints.txt /usr/share/minemeld/
 
