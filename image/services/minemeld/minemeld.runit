@@ -52,5 +52,8 @@ if [ ! -d ${PIDDIR} ] ; then
 	chmod 755 ${PIDDIR}
 fi
 
+# disable new extensions
+export DISABLE_NEW_EXTENSIONS=True
+
 echo "Starting minemeld..."
 exec /opt/minemeld/engine/current/bin/supervisord -u minemeld -n -c ${CONFIGFILE} --pidfile ${PIDFILE}
