@@ -13,6 +13,9 @@ echo "minemeld: checking if rabbitmq is serving requests..."
 exec 6<>/dev/tcp/127.0.0.1/5672 || exit 1
 exec 6>&- || exit 1
 
+# define policy for log writer
+/usr/sbin/rabbitmqctl set_policy mbus-log-writer "^mbus:log:writer" '{"max-length":100000}' --apply-to queues
+
 # check if committed-config exists
 if [ ! -f /opt/minemeld/local/config/committed-config.yml ] ; then
 	mkdir -p /opt/minemeld/local/config
@@ -51,6 +54,9 @@ if [ ! -d ${PIDDIR} ] ; then
 	chown -R minemeld:minemeld ${PIDDIR}
 	chmod 755 ${PIDDIR}
 fi
+
+# disable full trace
+export MM_DISABLE_FULL_TRACE=True
 
 # disable new extensions
 export DISABLE_NEW_EXTENSIONS=True
