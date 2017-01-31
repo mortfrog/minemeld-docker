@@ -17,9 +17,30 @@ $minimal_apt_get_install -q -o Dpkg::Options::=--force-confdef -o Dpkg::Options:
 mkdir /etc/service/minemeld
 cp $MM_BUILD_PATH/minemeld.runit /etc/service/minemeld/run
 
-## Install default config
-mkdir /usr/share/minemeld
-cp $MM_BUILD_PATH/default/* /usr/share/minemeld
+## Install autofocus extension
+/opt/minemeld/engine/current/bin/pip install $MM_BUILD_PATH/minemeld-autofocus
+
+# Change config
+truncate -s 0 /opt/minemeld/local/config/api/wsgi.htpasswd
+rm -f /opt/minemeld/local/config/api/20-local.yml
+
+## Save config
+mkdir -p /usr/share/minemeld/config
+cp -R /opt/minemeld/local/config/* /usr/share/minemeld/config
+
+## Copy default config
+cp $MM_BUILD_PATH/default-config.yml /opt/minemeld/local/config/committed-config.yml
+cp $MM_BUILD_PATH/default-config.yml /usr/share/minemeld/config/committed-config.yml
+
+## Define constraints.txt for extensions, with minemeld-autofocus installed
+/opt/minemeld/engine/current/bin/pip freeze > /opt/minemeld/local/library/constraints.txt
+cp /opt/minemeld/local/library/constraints.txt /usr/share/minemeld/
+
+## Change default retention
+cp $MM_BUILD_PATH/minemeld-traced-purge.conf /etc
+
+## Override nginx
+cp $MM_BUILD_PATH/minemeld-web.nginx /etc/nginx/sites-enabled/minemeld-web
 
 ## Divert 'service' (again)
 ln -sf /usr/bin/sv /usr/sbin/service
