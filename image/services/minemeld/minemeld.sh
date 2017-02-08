@@ -17,9 +17,16 @@ $minimal_apt_get_install -q -o Dpkg::Options::=--force-confdef -o Dpkg::Options:
 mkdir /etc/service/minemeld
 cp $MM_BUILD_PATH/minemeld.runit /etc/service/minemeld/run
 
-## Install default config
-mkdir /usr/share/minemeld
-cp -R $MM_BUILD_PATH/default/* /usr/share/minemeld
+# Change config
+rm -f /opt/minemeld/local/config/api/20-local.yml
+
+## Save config
+mkdir -p /usr/share/minemeld/config
+cp -R /opt/minemeld/local/config/* /usr/share/minemeld/config
+
+## Define constraints.txt for extensions
+/opt/minemeld/engine/current/bin/pip freeze > /opt/minemeld/local/library/constraints.txt
+cp /opt/minemeld/local/library/constraints.txt /usr/share/minemeld/
 
 ## Divert 'service' (again)
 ln -sf /usr/bin/sv /usr/sbin/service

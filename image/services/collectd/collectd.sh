@@ -12,3 +12,6 @@ cp $COLLECTD_BUILD_PATH/collectd.runit /etc/service/collectd/run
 
 ## Install logrotate.
 cp $COLLECTD_BUILD_PATH/logrotate_collectd /etc/logrotate.d/collectd
+
+## Add collected minemeld directory
+mkdir -p /var/lib/collectd/rrd/minemeld/
